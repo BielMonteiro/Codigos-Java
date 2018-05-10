@@ -1,0 +1,5 @@
+pao 2.0 0 50
+carne 10.0 1 40
+salgado 5.0 2 20
+Limão 10.0 3 100
+Limão 2 4 100
