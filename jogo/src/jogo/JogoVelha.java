@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.Component;
 import javax.swing.Box;
-public class JogoVelha extends JFrame {
+public class JogoVelha extends JFrame implements ActionListener{
 	JButton btn00 = new JButton("");
 	JButton btn01 = new JButton("");
 	JButton btn02 = new JButton("");
@@ -26,15 +26,18 @@ public class JogoVelha extends JFrame {
 	JButton btn20 = new JButton("");
 	JButton btn21 = new JButton("");
 	JButton btn22 = new JButton("");
+	
 	JLabel lblNome = new JLabel("Jogador 1");
+	
 	private JPanel contentPane;
 	int cont=1;
 	static int valor1=0;
 	static int valor2=0;
 	static int emp=0;
-	String[][] mat = new String[3][3];
+	int b=0;
 	private final JLabel lblEmpates = new JLabel("Numero de Empates: ");
 	private final JLabel label = new JLabel("-------------------------------------------");
+	
 	public JogoVelha() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -42,6 +45,17 @@ public class JogoVelha extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		btn00.addActionListener(this);
+		btn01.addActionListener(this);
+		btn02.addActionListener(this);
+		btn10.addActionListener(this);
+		btn11.addActionListener(this);
+		btn12.addActionListener(this);
+		btn20.addActionListener(this);
+		btn21.addActionListener(this);
+		btn22.addActionListener(this);
+		
 		btn00.setFont(new Font("Arial Black", Font.PLAIN, 12));
 		
 		btn00.setBounds(36, 38, 60, 42);
@@ -81,7 +95,6 @@ public class JogoVelha extends JFrame {
 		
 		lblNome.setBounds(26, 12, 70, 15);
 		contentPane.add(lblNome);
-		
 		JButton btnReiniciar = new JButton("Reiniciar");
 		btnReiniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -90,6 +103,7 @@ public class JogoVelha extends JFrame {
 				frame.setVisible(true);
 			}
 		});
+		
 		btnReiniciar.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		btnReiniciar.setBounds(335, 227, 89, 23);
 		contentPane.add(btnReiniciar);
@@ -123,132 +137,9 @@ public class JogoVelha extends JFrame {
 		lblJogador1.setText("Jogador 1(X): "+valor1);
 		lblJogador2.setText("Jogador 2(O): "+valor2);
 		lblEmpates.setText("Numero de Empates: "+emp);
-		btn00.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(btn00.getText()=="") {
-					if(cont%2!=0) {
-						btn00.setText("X");
-					}
-					else {
-						btn00.setText("O");
-					}
-				}
-				btn00.setEnabled(false);
-				result();
-			}
-		});
 		
-		btn01.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(btn01.getText()=="") {
-					if(cont%2!=0) {
-						btn01.setText("X");
-					}
-					else {
-						btn01.setText("O");
-					}	
-				}
-				btn01.setEnabled(false);
-				result();
-			}
-		});
-		btn02.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(btn02.getText()=="") {
-					if(cont%2!=0) {
-						btn02.setText("X");
-					}
-					else {
-						btn02.setText("O");
-					}	
-				}
-				btn02.setEnabled(false);
-				result();
-			}
-		});
-		btn10.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(btn10.getText()=="") {
-					if(cont%2!=0) {
-						btn10.setText("X");
-					}
-					else {
-						btn10.setText("O");
-					}	
-				}
-				btn10.setEnabled(false);
-				result();
-			}
-		});
-		btn11.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(btn11.getText()=="") {
-					if(cont%2!=0) {
-						btn11.setText("X");
-					}
-					else {
-						btn11.setText("O");
-					}	
-				}
-				btn11.setEnabled(false);
-				result();
-			}
-		});
-		btn12.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(btn12.getText()=="") {
-					if(cont%2!=0) {
-						btn12.setText("X");
-					}
-					else
-						btn12.setText("O");
-				}
-				btn12.setEnabled(false);
-				result();
-			}
-		});
-		btn20.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(btn20.getText()=="") {
-					if(cont%2!=0) {
-						btn20.setText("X");
-					}
-					else
-						btn20.setText("O");
-				}
-				btn20.setEnabled(false);
-				result();
-			}
-		});
-		btn21.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(btn21.getText()=="") {
-					if(cont%2!=0) {
-						btn21.setText("X");
-					}
-					else
-						btn21.setText("O");
-				}
-				btn21.setEnabled(false);
-				result();
-			}
-		});
-		btn22.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(btn22.getText()=="") {
-					if(cont%2!=0) {
-						btn22.setText("X");
-					}
-					else
-						btn22.setText("O");
-				}
-				btn22.setEnabled(false);
-				result();
-			}
-		});
 	}
 	public void result() {
-		int b=0;
 		if((!btn00.getText().equals("")&&btn00.getText().equals(btn01.getText())&& (btn01.getText().equals(btn02.getText())))) {
 			btn00.setBackground(Color.GREEN);
 			btn01.setBackground(Color.GREEN);
@@ -289,13 +180,13 @@ public class JogoVelha extends JFrame {
 			btn11.setBackground(Color.GREEN);
 			btn20.setBackground(Color.GREEN);
 		}
-		if(btn00.getBackground().equals(Color.green)||btn11.getBackground().equals(Color.green)||btn22.getBackground().equals(Color.green)) {
+		if((btn00.getBackground().equals(Color.green)||btn11.getBackground().equals(Color.green)||btn22.getBackground().equals(Color.green)) && b==0) {
 			if(lblNome.getText().equals("Jogador 1")) {
-				 JOptionPane.showMessageDialog(null,"O 1° Jogador ganhou");
+				 JOptionPane.showMessageDialog(null,"O 1Â° Jogador ganhou");
 				 valor1++;
 			}
 			else if(lblNome.getText().equals("Jogador 2")) {
-				JOptionPane.showMessageDialog(null,"O 2° Jogador ganhou");
+				JOptionPane.showMessageDialog(null,"O 2Â° Jogador ganhou");
 				valor2++;
 			}
 			b=1;
@@ -311,5 +202,20 @@ public class JogoVelha extends JFrame {
 			JOptionPane.showMessageDialog(null,"Deu velha");
 			emp++;
 		}
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton genericButton = (JButton) e.getSource();
+		
+		if(genericButton.getText() == "" && b==0) {
+			if(cont%2!=0) {
+				genericButton.setText("X");
+			}
+			else
+				genericButton.setText("O");
+		}
+		genericButton.setEnabled(false);
+		result();
+		
 	}
 }
