@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.Component;
 import javax.swing.Box;
+
 public class JogoVelha extends JFrame implements ActionListener{
 	JButton btn00 = new JButton("");
 	JButton btn01 = new JButton("");
@@ -26,17 +27,18 @@ public class JogoVelha extends JFrame implements ActionListener{
 	JButton btn20 = new JButton("");
 	JButton btn21 = new JButton("");
 	JButton btn22 = new JButton("");
-	
+	JButton btnNew = new JButton("");
 	JLabel lblNome = new JLabel("Jogador 1");
 	
 	private JPanel contentPane;
-	int cont=1;
+	static int cont=1;
 	static int valor1=0;
 	static int valor2=0;
 	static int emp=0;
 	int b=0;
 	private final JLabel lblEmpates = new JLabel("Numero de Empates: ");
 	private final JLabel label = new JLabel("-------------------------------------------");
+	int volta=0;
 	
 	public JogoVelha() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,6 +57,8 @@ public class JogoVelha extends JFrame implements ActionListener{
 		btn20.addActionListener(this);
 		btn21.addActionListener(this);
 		btn22.addActionListener(this);
+		
+		setLocationRelativeTo(null);
 		
 		btn00.setFont(new Font("Arial Black", Font.PLAIN, 12));
 		
@@ -95,6 +99,7 @@ public class JogoVelha extends JFrame implements ActionListener{
 		
 		lblNome.setBounds(26, 12, 70, 15);
 		contentPane.add(lblNome);
+		
 		JButton btnReiniciar = new JButton("Reiniciar");
 		btnReiniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -105,7 +110,7 @@ public class JogoVelha extends JFrame implements ActionListener{
 		});
 		
 		btnReiniciar.setFont(new Font("Arial Black", Font.PLAIN, 11));
-		btnReiniciar.setBounds(335, 227, 89, 23);
+		btnReiniciar.setBounds(335, 229, 89, 23);
 		contentPane.add(btnReiniciar);
 		
 		JLabel lblJogador1 = new JLabel("Jogador 1(X):");
@@ -126,6 +131,7 @@ public class JogoVelha extends JFrame implements ActionListener{
 		JLabel lblVitorias_1 = new JLabel("Vitorias");
 		lblVitorias_1.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		lblVitorias_1.setBounds(295, 63, 63, 14);
+		
 		contentPane.add(lblVitorias_1);
 		lblEmpates.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		lblEmpates.setBounds(269, 147, 155, 14);
@@ -138,58 +144,79 @@ public class JogoVelha extends JFrame implements ActionListener{
 		lblJogador2.setText("Jogador 2(O): "+valor2);
 		lblEmpates.setText("Numero de Empates: "+emp);
 		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(volta==0) {
+					btnNew.setText("");
+					btnNew.setEnabled(true);
+					cont-=2;
+					result();
+					volta=1;
+				}
+			}
+		});
+		btnVoltar.setBounds(41, 228, 89, 23);
+		contentPane.add(btnVoltar);
+		
 	}
+	
 	public void result() {
-		if((!btn00.getText().equals("")&&btn00.getText().equals(btn01.getText())&& (btn01.getText().equals(btn02.getText())))) {
-			btn00.setBackground(Color.GREEN);
-			btn01.setBackground(Color.GREEN);
-			btn02.setBackground(Color.GREEN);
-		}
-		else if((!btn10.getText().equals("")&&btn10.getText().equals(btn11.getText())&& (btn11.getText().equals(btn12.getText())))) {
-			btn10.setBackground(Color.GREEN);
-			btn11.setBackground(Color.GREEN);
-			btn12.setBackground(Color.GREEN);
-		}
-		else if((!btn20.getText().equals("")&&btn20.getText().equals(btn21.getText())&& (btn21.getText().equals(btn22.getText())))) {
-			btn20.setBackground(Color.GREEN);
-			btn21.setBackground(Color.GREEN);
-			btn22.setBackground(Color.GREEN);
-		}
-		else if((!btn00.getText().equals("")&&btn00.getText().equals(btn10.getText())&& (btn10.getText().equals(btn20.getText())))) {
-			btn00.setBackground(Color.GREEN);
-			btn10.setBackground(Color.GREEN);
-			btn20.setBackground(Color.GREEN);
-		}
-		else if((!btn01.getText().equals("")&&btn01.getText().equals(btn11.getText())&& (btn11.getText().equals(btn21.getText())))) {
-			btn01.setBackground(Color.GREEN);
-			btn11.setBackground(Color.GREEN);
-			btn21.setBackground(Color.GREEN);
-		}
-		else if((!btn02.getText().equals("")&&btn02.getText().equals(btn12.getText())&& (btn12.getText().equals(btn22.getText())))) {
-			btn02.setBackground(Color.GREEN);
-			btn12.setBackground(Color.GREEN);
-			btn22.setBackground(Color.GREEN);
-		}
-		else if((!btn00.getText().equals("")&&btn00.getText().equals(btn11.getText())&& (btn11.getText().equals(btn22.getText())))) {
-			btn00.setBackground(Color.GREEN);
-			btn11.setBackground(Color.GREEN);
-			btn22.setBackground(Color.GREEN);
-		}
-		else if((!btn02.getText().equals("")&&btn02.getText().equals(btn11.getText())&& (btn11.getText().equals(btn20.getText())))) {
-			btn02.setBackground(Color.GREEN);
-			btn11.setBackground(Color.GREEN);
-			btn20.setBackground(Color.GREEN);
-		}
-		if((btn00.getBackground().equals(Color.green)||btn11.getBackground().equals(Color.green)||btn22.getBackground().equals(Color.green)) && b==0) {
-			if(lblNome.getText().equals("Jogador 1")) {
-				 JOptionPane.showMessageDialog(null,"O 1° Jogador ganhou");
-				 valor1++;
+		if(cont>4) {
+			if((!btn00.getText().equals("")&&btn00.getText().equals(btn01.getText())&& (btn01.getText().equals(btn02.getText())))) {
+				btn00.setBackground(Color.GREEN);
+				btn01.setBackground(Color.GREEN);
+				btn02.setBackground(Color.GREEN);
 			}
-			else if(lblNome.getText().equals("Jogador 2")) {
-				JOptionPane.showMessageDialog(null,"O 2° Jogador ganhou");
-				valor2++;
+			else if((!btn10.getText().equals("")&&btn10.getText().equals(btn11.getText())&& (btn11.getText().equals(btn12.getText())))) {
+				btn10.setBackground(Color.GREEN);
+				btn11.setBackground(Color.GREEN);
+				btn12.setBackground(Color.GREEN);
 			}
-			b=1;
+			else if((!btn20.getText().equals("")&&btn20.getText().equals(btn21.getText())&& (btn21.getText().equals(btn22.getText())))) {
+				btn20.setBackground(Color.GREEN);
+				btn21.setBackground(Color.GREEN);
+				btn22.setBackground(Color.GREEN);
+			}
+			else if((!btn00.getText().equals("")&&btn00.getText().equals(btn10.getText())&& (btn10.getText().equals(btn20.getText())))) {
+				btn00.setBackground(Color.GREEN);
+				btn10.setBackground(Color.GREEN);
+				btn20.setBackground(Color.GREEN);
+			}
+			else if((!btn01.getText().equals("")&&btn01.getText().equals(btn11.getText())&& (btn11.getText().equals(btn21.getText())))) {
+				btn01.setBackground(Color.GREEN);
+				btn11.setBackground(Color.GREEN);
+				btn21.setBackground(Color.GREEN);
+			}
+			else if((!btn02.getText().equals("")&&btn02.getText().equals(btn12.getText())&& (btn12.getText().equals(btn22.getText())))) {
+				btn02.setBackground(Color.GREEN);
+				btn12.setBackground(Color.GREEN);
+				btn22.setBackground(Color.GREEN);
+			}
+			else if((!btn00.getText().equals("")&&btn00.getText().equals(btn11.getText())&& (btn11.getText().equals(btn22.getText())))) {
+				btn00.setBackground(Color.GREEN);
+				btn11.setBackground(Color.GREEN);
+				btn22.setBackground(Color.GREEN);
+			}
+			else if((!btn02.getText().equals("")&&btn02.getText().equals(btn11.getText())&& (btn11.getText().equals(btn20.getText())))) {
+				btn02.setBackground(Color.GREEN);
+				btn11.setBackground(Color.GREEN);
+				btn20.setBackground(Color.GREEN);
+			}
+			if((btn00.getBackground().equals(Color.green)||btn11.getBackground().equals(Color.green)||btn22.getBackground().equals(Color.green)) && b==0) {
+				if(lblNome.getText().equals("Jogador 1")) {
+					 JOptionPane.showMessageDialog(null,"O 1° Jogador ganhou");
+					 valor1++;
+					 cont=0;
+				}
+				else if(lblNome.getText().equals("Jogador 2")) {
+					JOptionPane.showMessageDialog(null,"O 2° Jogador ganhou");
+					valor2++;
+					cont=1;
+				}
+				b=1;
+			}
+			
 		}
 		if(b==0) {
 			cont++;
@@ -197,16 +224,20 @@ public class JogoVelha extends JFrame implements ActionListener{
 				lblNome.setText("Jogador 1");
 			else
 				lblNome.setText("Jogador 2");
+			volta=0;
 		}
 		if(b==0 && cont==10) {
 			JOptionPane.showMessageDialog(null,"Deu velha");
 			emp++;
+			cont=1;
 		}
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		System.out.println(cont);
 		JButton genericButton = (JButton) e.getSource();
-		
+		btnNew=genericButton;
 		if(genericButton.getText() == "" && b==0) {
 			if(cont%2!=0) {
 				genericButton.setText("X");
