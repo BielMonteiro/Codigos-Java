@@ -16,6 +16,11 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.Component;
 import javax.swing.Box;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 
 public class JogoVelha extends JFrame implements ActionListener{
 	JButton btn00 = new JButton("");
@@ -36,14 +41,54 @@ public class JogoVelha extends JFrame implements ActionListener{
 	static int valor2=0;
 	static int emp=0;
 	int ganhador=0;
-	int contJ=0;
+	static boolean jogador=true;
+	
 	private final JLabel lblEmpates = new JLabel("Numero de Empates: ");
 	private final JLabel label = new JLabel("-------------------------------------------");
 	int volta=0;
+	private final JMenuItem mntmNovoJogo = new JMenuItem("Novo Jogo");
 	
 	public JogoVelha() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 484, 322);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnOpcao = new JMenu("Opcao");
+		menuBar.add(mnOpcao);
+		mntmNovoJogo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				valor1=0;
+				valor2=0;
+				emp=0;
+				cont=1;
+				dispose();
+				JogoVelha frame = new JogoVelha();
+				frame.setVisible(true);
+				/*
+				btn00.setText("");
+				btn00.setEnabled(true);
+				btn01.setText("");
+				btn01.setEnabled(true);
+				btn02.setText("");
+				btn02.setEnabled(true);
+				btn10.setText("");
+				btn10.setEnabled(true);
+				btn11.setText("");
+				btn11.setEnabled(true);
+				btn12.setText("");
+				btn12.setEnabled(true);
+				btn20.setText("");
+				btn20.setEnabled(true);
+				btn21.setText("");
+				btn21.setEnabled(true);
+				btn22.setText("");
+				btn22.setEnabled(true);*/
+			}
+		});
+		
+		mnOpcao.add(mntmNovoJogo);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -97,6 +142,7 @@ public class JogoVelha extends JFrame implements ActionListener{
 		
 		btn22.setBounds(180, 148, 60, 42);
 		contentPane.add(btn22);
+		lblNome.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		
 		lblNome.setBounds(26, 12, 70, 15);
 		contentPane.add(lblNome);
@@ -146,9 +192,10 @@ public class JogoVelha extends JFrame implements ActionListener{
 		lblEmpates.setText("Numero de Empates: "+emp);
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(volta==0 && contJ!=0) {
+				if(volta==0 && !btnNew.getText().equals("")) {
 					btnNew.setText("");
 					btnNew.setEnabled(true);
 					cont-=2;
@@ -159,7 +206,6 @@ public class JogoVelha extends JFrame implements ActionListener{
 		});
 		btnVoltar.setBounds(41, 228, 89, 23);
 		contentPane.add(btnVoltar);
-		
 	}
 	
 	public void result() {
@@ -208,27 +254,26 @@ public class JogoVelha extends JFrame implements ActionListener{
 				if(lblNome.getText().equals("Jogador 1")) {
 					 JOptionPane.showMessageDialog(null,"O 1° Jogador ganhou");
 					 valor1++;
-					 cont=2;
 				}
 				else if(lblNome.getText().equals("Jogador 2")) {
 					JOptionPane.showMessageDialog(null,"O 2° Jogador ganhou");
 					valor2++;
-					cont=1;
 				}
 				ganhador=1;
+				cont=1;
 			}
-			
 		}
 		if(ganhador==0) {
 			cont++;
-			contJ++;
-			if(cont%2==1)
+			if(jogador) {
 				lblNome.setText("Jogador 1");
-			else
+			}
+			else {
 				lblNome.setText("Jogador 2");
+			}
 			volta=0;
 		}
-		if(ganhador==0 && cont>=10) {
+		if(ganhador==0 && cont==10) {
 			JOptionPane.showMessageDialog(null,"Deu velha");
 			emp++;
 			cont=1;
@@ -240,14 +285,14 @@ public class JogoVelha extends JFrame implements ActionListener{
 		JButton genericButton = (JButton) e.getSource();
 		btnNew=genericButton;
 		if(genericButton.getText() == "" && ganhador==0) {
-			if(cont%2!=0) {
+			if(jogador) {
 				genericButton.setText("X");
 			}
 			else
 				genericButton.setText("O");
 		}
+		jogador=!jogador;
 		genericButton.setEnabled(false);
 		result();
-		
 	}
 }
