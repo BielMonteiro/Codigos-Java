@@ -35,7 +35,8 @@ public class JogoVelha extends JFrame implements ActionListener{
 	static int valor1=0;
 	static int valor2=0;
 	static int emp=0;
-	int b=0;
+	int ganhador=0;
+	int contJ=0;
 	private final JLabel lblEmpates = new JLabel("Numero de Empates: ");
 	private final JLabel label = new JLabel("-------------------------------------------");
 	int volta=0;
@@ -147,7 +148,7 @@ public class JogoVelha extends JFrame implements ActionListener{
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(volta==0) {
+				if(volta==0 && contJ!=0) {
 					btnNew.setText("");
 					btnNew.setEnabled(true);
 					cont-=2;
@@ -203,30 +204,31 @@ public class JogoVelha extends JFrame implements ActionListener{
 				btn11.setBackground(Color.GREEN);
 				btn20.setBackground(Color.GREEN);
 			}
-			if((btn00.getBackground().equals(Color.green)||btn11.getBackground().equals(Color.green)||btn22.getBackground().equals(Color.green)) && b==0) {
+			if((btn00.getBackground().equals(Color.green)||btn11.getBackground().equals(Color.green)||btn22.getBackground().equals(Color.green)) && ganhador==0) {
 				if(lblNome.getText().equals("Jogador 1")) {
 					 JOptionPane.showMessageDialog(null,"O 1° Jogador ganhou");
 					 valor1++;
-					 cont=0;
+					 cont=2;
 				}
 				else if(lblNome.getText().equals("Jogador 2")) {
 					JOptionPane.showMessageDialog(null,"O 2° Jogador ganhou");
 					valor2++;
 					cont=1;
 				}
-				b=1;
+				ganhador=1;
 			}
 			
 		}
-		if(b==0) {
+		if(ganhador==0) {
 			cont++;
+			contJ++;
 			if(cont%2==1)
 				lblNome.setText("Jogador 1");
 			else
 				lblNome.setText("Jogador 2");
 			volta=0;
 		}
-		if(b==0 && cont==10) {
+		if(ganhador==0 && cont>=10) {
 			JOptionPane.showMessageDialog(null,"Deu velha");
 			emp++;
 			cont=1;
@@ -235,10 +237,9 @@ public class JogoVelha extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(cont);
 		JButton genericButton = (JButton) e.getSource();
 		btnNew=genericButton;
-		if(genericButton.getText() == "" && b==0) {
+		if(genericButton.getText() == "" && ganhador==0) {
 			if(cont%2!=0) {
 				genericButton.setText("X");
 			}
