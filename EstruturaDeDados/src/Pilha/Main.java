@@ -12,7 +12,10 @@ public class Main {
 		teste.imprimirPilha();
 		teste.insere(50);
 		teste.remove();
+		teste.remove();
+		teste.remove();
+		teste.remove();
+		teste.remove();
 		teste.imprimirPilha();
-		System.out.println(teste.pilha[4]);
 	}
 }
