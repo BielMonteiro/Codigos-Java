@@ -8,7 +8,6 @@ public class TesteLista implements Lista {
 		lista = new Integer[tamLista];
 		pos=-1;
 	}
-
 	public Integer insereFinal(Integer valor) {
 		if(!listaCheia()) {
 			pos++;
@@ -19,7 +18,7 @@ public class TesteLista implements Lista {
 	public Integer insereComeco(Integer valor) {
 		if(!listaCheia()) {
 			pos++;
-			for (int i = pos-1; i > 0; i--) {
+			for (int i = pos; i > 0; i--) {
 				if(i>0)
 					lista[i]=lista[i-1];
 			}
@@ -28,22 +27,21 @@ public class TesteLista implements Lista {
 		return valor;
 	}
 	public Integer inserePosicao(Integer valor,Integer valor2) {
-		if(valor2>0&&(valor2<=tamLista)) {
-			if(pos<valor2-1) {
+		if(!listaCheia()) {
+			if(valor2>tamLista||valor2<=0) 
+				System.out.println("O Valor esta fora do interval [1,5]");
+			else if(valor2-1<=pos) {
+				pos++;
+				for (int i = pos; i > valor2-1; i--) {
+					lista[i]=lista[i-1];
+				}
+				lista[valor2-1]=valor;
+			}
+			else {
 				pos++;
 				lista[pos]=valor;
-			}
-			else{
-				if(lista[valor2-1]==null) {
-					pos++;
-					lista[valor2-1]=valor;
-				}
-				else
-					System.out.println("Posição Ocupada");
-			}
+			}	
 		}
-		else
-			System.out.println("O Valor esta fora do interval [1,5]");
 		return valor;
 	}
 	public Integer removeInicial() {
