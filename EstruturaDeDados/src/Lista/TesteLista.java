@@ -44,6 +44,25 @@ public class TesteLista implements Lista {
 		}
 		return valor;
 	}
+	
+	public Integer insereOrdenada(Integer valor) {
+		int indice=0;
+		//if(pos!=-1)
+			//ordenaLista();
+		if(!listaCheia()) {
+			pos++;
+			for (int i = 0; i<pos; i++) {
+				if((lista[i]<=valor)) {
+					indice=i+1;
+				}	
+			}
+			for (int i = pos; i > indice; i--) {
+				lista[i]=lista[i-1];
+			}
+			lista[indice]=valor;
+		}
+		return valor;
+	}
 	public Integer removeInicial() {
 		if(!listaVazia()) {
 			for (int i = 0; i < pos; i++) {
@@ -84,6 +103,20 @@ public class TesteLista implements Lista {
 		else
 			System.out.println("O Valor esta fora do interval [1,5]");	
 		return null;
+	}
+	public void ordenaLista() {
+		int aux;
+		if(!listaVazia()) {
+			for (int i = 0; i <=pos; i++) {
+				for (int j = i; j <=pos; j++) {
+					if(lista[i]>lista[j]) {
+						aux=lista[j];
+						lista[j]=lista[i];
+						lista[i]=aux;
+					}
+				}
+			}
+		}
 	}
 	public boolean listaVazia() {
 		if(pos==-1) {
