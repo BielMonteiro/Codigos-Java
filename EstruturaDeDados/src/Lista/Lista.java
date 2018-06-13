@@ -6,6 +6,7 @@ public interface Lista {
 	public Integer insereFinal(Integer valor);
 	public Integer insereComeco(Integer valor);
 	public Integer inserePosicao(Integer valor,Integer valor2);
+	public Integer insereOrdenada(Integer valor);
 	public Integer removeInicial();
 	public Integer removeFinal();
 	public Integer removePosicao(Integer valor);
@@ -13,6 +14,7 @@ public interface Lista {
 	/*
 	 Operacoes auxiliares
 	 */
+	public void ordenaLista();
 	public boolean listaVazia();
 	public boolean listaCheia();
 	public void imprimirLista();
