@@ -46,23 +46,37 @@ public class TesteLista implements Lista {
 	}
 	
 	public Integer insereOrdenada(Integer valor) {
+		int maior=lista[0];
 		int indice=0;
-		//if(pos!=-1)
-			//ordenaLista();
+		int flag=0;
 		if(!listaCheia()) {
-			pos++;
-			for (int i = 0; i<pos; i++) {
-				if((lista[i]<=valor)) {
-					indice=i+1;
-				}	
+			if(pos == -1)
+				insereComeco(valor);
+			else{
+				int aux = 0;
+				for (int i=0; i<=pos; i++){
+					if(lista[i]>valor){
+						aux = i;
+						for (int j=aux+1; j<=pos; j++){
+							if(lista[j]<lista[aux]&& lista[j]>valor) {
+								aux = j;
+								flag=1;
+							}
+						}
+						inserePosicao(valor, aux+1);
+						return null;
+					}
+					if(lista[i]>maior){
+						indice=i;
+						maior=lista[i];
+					}
+				}
 			}
-			for (int i = pos; i > indice; i--) {
-				lista[i]=lista[i-1];
-			}
-			lista[indice]=valor;
+			if(flag==0)
+				inserePosicao(valor,indice+2);
 		}
-		return valor;
-	}
+		return null;
+		}
 	public Integer removeInicial() {
 		if(!listaVazia()) {
 			for (int i = 0; i < pos; i++) {
