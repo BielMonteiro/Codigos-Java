@@ -14,6 +14,10 @@ public interface Lista {
 	/*
 	 Operacoes auxiliares
 	 */
+	public void linkUsado(int nome);
+	public void palindromo();
+	public void alterarLista(int x);
+	public void antePenultimo();
 	public void ordenaLista();
 	public boolean listaVazia();
 	public boolean listaCheia();
