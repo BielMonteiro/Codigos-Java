@@ -167,6 +167,7 @@ public class TesteLista implements Lista {
 			for (int i = 0; i <=pos; i++) {
 				System.out.print(lista[pos-i]+" ");
 			}
+			System.out.println();
 		}
 		else if(x==1){
 				for (int i = 0; i <=pos; i++) {
@@ -191,14 +192,16 @@ public class TesteLista implements Lista {
 			System.out.println("Não é um Palindromo");
 	}
 	public void linkUsado(int nome) {
-		int indice=0;
-		int aux;
+		int indice=-1;
 		for (int i = 0; i <=pos; i++) {
-			if(lista[i].equals(nome))
+			if(lista[i].equals(nome)) {
 				indice=i;
+				break;
+			}
 		}
-		aux=lista[0];
-		removePosicao(indice);
-		insereComeco(nome);
+		if(indice!=-1) {
+			removePosicao(indice+1);  //Se o elemento existir no vetor
+			insereComeco(nome);
+		}
 	}
 }
