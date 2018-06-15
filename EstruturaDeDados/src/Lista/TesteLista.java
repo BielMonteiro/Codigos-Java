@@ -2,7 +2,7 @@ package Lista;
 
 public class TesteLista implements Lista {
 	public Integer[] lista;
-	public static final int tamLista=5;
+	public static final int tamLista=6;
 	public int pos;
 	public TesteLista() {
 		lista = new Integer[tamLista];
@@ -148,11 +148,57 @@ public class TesteLista implements Lista {
 		else
 			return false;
 	}
+	public void antePenultimo() {
+		if(pos-2<0)
+			System.out.println("Não existe Antepenultimo");
+		else
+			System.out.println("O antepenultimo é: "+lista[pos-2]);
+	}
 	public void imprimirLista() {
 		if(!listaVazia()) {
 			for (int i = 0; i <=pos; i++) {
-				System.out.println(lista[i]);
+				System.out.print(lista[i]+" ");
+			}
+			System.out.println();
+		}
+	}
+	public void alterarLista(int x) {
+		if(x==0) {
+			for (int i = 0; i <=pos; i++) {
+				System.out.print(lista[pos-i]+" ");
 			}
 		}
+		else if(x==1){
+				for (int i = 0; i <=pos; i++) {
+					if(i!=0)
+						System.out.print(lista[i]+" ");
+				}
+			System.out.print(lista[0]+"\n");
+		}
+		else
+			System.out.println("Opção inválida");
+		
+	}
+	public void palindromo() {
+		int cont=0;
+		for (int i = 0; i <=(pos/2); i++) {
+			if(lista[i].equals(lista[pos-i]))
+				cont++;
+		}
+		if(cont==(pos/2)+1)
+			System.out.println("É um Palindromo");
+		else
+			System.out.println("Não é um Palindromo");
+	}
+	public void linkUsado(int nome) {
+		int indice=0;
+		int aux;
+		for (int i = 0; i <=pos; i++) {
+			if(lista[i].equals(nome))
+				indice=i;
+		}
+		aux=lista[0];
+		removePosicao(indice);
+		insereComeco(nome);
 	}
 }
