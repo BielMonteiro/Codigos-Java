@@ -4,5 +4,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="Vetor"/>
 	<classpathentry kind="src" path="EncadeamentoSimples"/>
+	<classpathentry kind="src" path="DuplamenteEncadeado"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
