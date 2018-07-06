@@ -24,9 +24,12 @@ public class Main {
 		lista.inserePosicao(50,6);
 		lista.inserePosicao(100,6);
 		lista.inserePosicao(100,30);
-		lista.imprimirFila();
-
-
+		lista.imprimirLista();
+		lista.antepenultimo();
+		lista.ordemCrescenteLista();
+		lista.imprimirLista();
+		lista.ordemDescrecenteLista();
+		lista.imprimirLista();
 	}
 
 }

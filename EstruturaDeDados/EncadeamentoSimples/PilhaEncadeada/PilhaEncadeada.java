@@ -34,6 +34,29 @@ public class PilhaEncadeada {
 		return aux.getValor();
 		
 	}
+	public void palindromo() {
+		int acerto=0;
+		PilhaEncadeada stack =new PilhaEncadeada();
+		No aux=cabeca;
+		int i=0;
+		for(aux=cabeca;aux!=null;aux=aux.getProximo()) {
+			if(i==tamanho/2)
+				break;
+			i++;
+			stack.insereFim(aux.getValor());
+		}
+		if(tamanho%2!=0)
+			aux=aux.getProximo();
+		for(aux=aux;aux!=null;aux=aux.getProximo()) {
+			if(aux.getValor().equals(stack.removeFinal()))
+				acerto++;
+		}
+		if(i==acerto)
+			System.out.println("É um Palindromo");
+		else
+			System.out.println("Não é um Palindromo");
+		
+	}
 	public No getCauda(){
 			
 			No aux = cabeca;

@@ -12,7 +12,7 @@ public class No {
 		return valor;
 	}
 	public void setValor(Integer valor) {
-		valor = valor;
+		this.valor = valor;
 	}
 	public No getProximo() {
 		return proximo;

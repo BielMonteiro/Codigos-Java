@@ -1,7 +1,6 @@
 package ListaEncadeada;
 
-
-public class ListaEncadeada {
+public class ListaEncadeada implements ListaEncadeadaSimples{
 	
 	private No cabeca;
 	private int tamanho;
@@ -105,6 +104,44 @@ public class ListaEncadeada {
 			}
 			return aux;
 	}
+	public void antepenultimo() {
+		No aux=cabeca;
+		if(tamanho<3)
+			System.out.println("Não existe antepenúltimo");
+		else
+			for (aux = cabeca;aux.getProximo().getProximo().getProximo()!=null;aux =aux.getProximo()) {
+				
+			}
+		System.out.println("Esse é o antePenultimo: "+aux.getValor());
+	}
+	public void ordemCrescenteLista() {
+		if(tamanho!=0) {
+			for (No aux = cabeca;aux!=null;aux=aux.getProximo()) {
+				for (No aux2 = aux.getProximo();aux2!=null;aux2=aux2.getProximo()) {
+					Integer aux3;
+					if(aux.getValor()>aux2.getValor()) {
+						aux3=aux.getValor();
+						aux.setValor(aux2.getValor());
+						aux2.setValor(aux3);
+					}
+				}
+			}
+		}
+	}
+	public void ordemDescrecenteLista() {
+		if(tamanho!=0) {
+			for (No aux = cabeca;aux!=null;aux=aux.getProximo()) {
+				for (No aux2 = aux.getProximo();aux2!=null;aux2=aux2.getProximo()) {
+					Integer aux3;
+					if(aux.getValor()<aux2.getValor()) {
+						aux3=aux.getValor();
+						aux.setValor(aux2.getValor());
+						aux2.setValor(aux3);
+					}
+				}
+			}
+		}
+	}
 	public boolean listaVazia(Integer valor) {
 		if(cabeca == null) {
 			cabeca = new No(valor,null);
@@ -114,7 +151,7 @@ public class ListaEncadeada {
 		return false;
 	}
 	
-	public void imprimirFila() {
+	public void imprimirLista() {
 		No aux = cabeca;
 		if(cabeca==null) {
 			System.out.println("Lista vazia.");
@@ -123,7 +160,27 @@ public class ListaEncadeada {
 		for(aux = cabeca;aux!=null;aux=aux.getProximo()) {
 			System.out.print(aux.getValor()+" ");
 		}
-		//System.out.println();
+		System.out.println();
+	}
+	@Override
+	public Integer insereOrdenada(Integer valor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void linkUsado(int nome) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void palindromo() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void alterarLista(int x) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
