@@ -185,7 +185,7 @@ public class AVLTree {
 	
 	private void imprimirPrefixado2(No v) {
 		if (v!=null) {
-			System.out.println(v.getValor() + " Altura: "+altura(v)+" - Profundidade: "+profundidade(v)+ " - IndiceBalanceamento: "+v.getBalanceamento()*-1);
+			System.out.println(v.getValor()+ " - IndiceBalanceamento: "+v.getBalanceamento()*-1);
 			imprimirPrefixado2(v.getEsquerda());
 			imprimirPrefixado2(v.getDireita());
 		}
